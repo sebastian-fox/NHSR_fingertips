@@ -1,0 +1,94 @@
+---
+title: "An Introduction to fingertipsR and fingertipscharts"
+author: "Sebastian Fox\nPublic Health Data Science, PHE"
+output:
+  phecharts::html_phe_slidy
+---
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(fingertipsR)
+opts_chunk$set(echo=FALSE,
+               cache=FALSE)
+```
+
+## Outline
+
+- [Fingertips](https://fingertips.phe.org.uk/) overview
+- Interactive workshop part 1 - `fingertipsR`
+- Break
+- Interactive workshop part 2 - `fingertipscharts`
+
+## Fingertips
+[Fingertips](https://fingertips.phe.org.uk/) is a platform containing 1,700 indicators of public health in England.
+
+It presents data at different geographies, and in many cases can be cut in different age groups, sexes and time period.
+
+For many indicators, significance testing is performed to give added insight into how areas are performing when compared to their peers.
+
+It presents the data in many different visualisations that can be used for different purposes.
+
+<iframe src="https://fingertips.phe.org.uk/" width='90%' height='720px'></iframe>
+
+
+## fingertipsR
+
+### What does the package do?
+
+Simply put, the package translates user inputs into a url, which maps to the Fingertips API. It then imports data from the Application Programming Interface (API) into the users R workspace.
+
+The package accesses the internet, so a network connection is required when you use it. Also, the amount of data you are importing will affect the time it takes to import it.
+
+This is a typical url generated:
+
+https://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=10101&child_area_type_id=202&parent_area_type_id=6&include_sortable_time_periods=yes
+
+This is what the data at that url looks like:
+
+<iframe src="https://fingertips.phe.org.uk/api/all_data/csv/by_indicator_id?indicator_ids=10101&child_area_type_id=202&parent_area_type_id=6&include_sortable_time_periods=yes" width='90%' height='720px'></iframe>
+
+
+## The data provided from fingertipsR
+
+This table is what the previous data comes into your R environment looking like:
+
+```{r import_data}
+df <- fingertips_data(IndicatorID = 10101,
+                      AreaTypeID = 202)
+
+DT::datatable(df)
+```
+
+## fingertips_data: the main function
+
+These are the arguments that the user can provide to `fingertips_data()`
+
+```{r fingertips_data, eval=FALSE, echo=TRUE}
+fingertips_data(IndicatorID = NULL, 
+                AreaCode = NULL, 
+                DomainID = NULL,
+                ProfileID = NULL, 
+                AreaTypeID, 
+                ParentAreaTypeID = NULL, 
+                categorytype = FALSE,
+                rank = FALSE, 
+                url_only = FALSE, 
+                path) 
+```
+
+## Common problems
+
+- `AreaTypeID` mismatch with `IndicatorID`
+- Multiple age groups/sex within data, therefore analysis not adding up to what is expected
+- Script worked one day but not the week after; Fingertips updates its data on the 1st Tuesday of each month. Sometimes this means indicators are removed or changed. The API is live...
+- What does `ParentAreaTypeID` refer to? See "Areas grouped by" on Fingertips website
+- Any other issues, please check here and report them if they aren't covered: https://github.com/ropensci/fingertipsR/issues
+
+## Accessing the documentation
+
+To access the documentation for a function, put a question mark in front of it within your console: `?fingertips_data`
+
+(hint: you can also double click on the function in a script and press F1 on the keyboard)
+
+
+
