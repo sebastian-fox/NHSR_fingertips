@@ -1,7 +1,6 @@
 
 # Libraries ---------------------------------------------------------------
 
-if (!require(fingertipscharts)) install.packages("fingertipscharts")
 if (!require(dplyr)) install.packages("dplyr")
 
 # Note, fingertipsR is not on CRAN and won't be for the foreseeable future
