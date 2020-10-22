@@ -77,5 +77,29 @@ df <- fingertips_data(IndicatorID = 20101,
 ## Do you understand why you get the number of records that are returned?
 df <- fingertips_data(IndicatorID = 20101,
                       AreaTypeID = 220)
+nrow(df)
+
+# fingertips_data has a ParentAreaTypeID argument. This exercise helps you understand what this is.
+## Go to this url: https://fingertips.phe.org.uk/profile/public-health-outcomes-framework/data#page/0/gid/1000042/pat/6/par/E12000009/ati/102/are/E06000053/iid/90244/age/168/sex/4/cid/4/page-options/car-do-0_ovw-do-0
+## Click the drop down for "Areas grouped by". See how that list changes when you select different "Area types"
+
+
+## Now look at the outputs of the area_types() function again. You can see that each AreaTypeID maps to multiple ParentAreaTypeIDs
+area_types() %>% 
+        View()
+
+## Execute this line of code and inspect the different AreaTypes that are in the data:
+# Note, each indicator-area type combination has a default parent area type
+df <- fingertips_data(IndicatorID = 91337,
+                      AreaTypeID = 165) # CCGs unchanged plus new 2019
+View(df)
+table(df$AreaType)
+
+## Now execute this code and compare the AreaTypes in what is returned:
+df <- fingertips_data(IndicatorID = 91337,
+                      AreaTypeID = 165, # CCGs unchanged plus new 2019
+                      ParentAreaTypeID = 219) 
+View(df)
+table(df$AreaType)
 
 
