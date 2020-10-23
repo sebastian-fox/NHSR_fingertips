@@ -54,7 +54,7 @@ df_overview <- df %>%
 ## Look at the documentation for the overview() function
 ?overview
 
-# This example demonatrates the principal of how all of the fingertipscharts functions work
+# This example demonstrates the principal of how all of the fingertipscharts functions work
 p <- overview(data = df_overview,
               area = AreaName,
               indicator = IndicatorName,
@@ -129,7 +129,7 @@ p
 ## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/8/gid/1938133263/pat/6/par/E12000009/ati/202/are/E06000022/iid/10101/age/169/sex/4/cid/4/page-options/ovw-do-0_cin-ci-4_map-ao-4
 
 ## Complete area_code, fill, value, name_for_label
-p <- map(map_data,
+p <- map(data = map_data,
          ons_api = ons_api,
          area_code = AreaCode,
          fill = ComparedtoEnglandvalueorpercentiles,
