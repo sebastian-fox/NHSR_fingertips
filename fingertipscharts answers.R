@@ -65,7 +65,8 @@ p <- overview(data = df_overview,
               wrap_length = 35,
               legend_position = "bottom")
 p
-
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/0/gid/1938133263/pat/6/par/E12000009/ati/202/are/E06000022/cid/4/page-options/ovw-do-0
 
 # Compare indicators ------------------------------------------------------
 
@@ -92,7 +93,6 @@ p <- compare_indicators(data = plot_data,
                         area = AreaCode,
                         add_R2 = TRUE)
 p
-
 
 # Map ---------------------------------------------------------------------
 
@@ -125,6 +125,9 @@ p <- fingertipscharts::map(data = map_data,
 
 p
 
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/8/gid/1938133263/pat/6/par/E12000009/ati/202/are/E06000022/iid/10101/age/169/sex/4/cid/4/page-options/ovw-do-0_cin-ci-4_map-ao-4
+
 ## Complete area_code, fill, value, name_for_label
 p <- map(map_data,
          ons_api = ons_api,
@@ -155,10 +158,13 @@ p <- trends(data = df_trend,
             lowerci = LowerCI95.0limit,
             upperci = UpperCI95.0limit,
             title = "Trend of Children in low income families (under 16s)\ncompared to England",
-            subtitle = "For area E08000010",
+            subtitle = "Wigan",
             xlab = "Year",
             ylab = "Percent (%)")
 p
+
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/4/gid/1938133263/pat/6/par/E12000002/ati/202/are/E08000010/iid/10101/age/169/sex/4/cid/4/page-options/ovw-do-0_cin-ci-4
 
 
 # Compare areas -----------------------------------------------------------
@@ -188,6 +194,8 @@ p <- compare_areas(data = df_ca,
                    top_areas = fixed_areas,
                    title = "Percentage of 5 year olds with experience of visually obvious dental decay")
 p
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/3/gid/1938133263/pat/6/par/E12000009/ati/202/are/E06000022/iid/93563/age/34/sex/4/cid/4/page-options/ovw-do-0_cin-ci-4_car-do-0
 
 
 # Population --------------------------------------------------------------
@@ -220,6 +228,8 @@ p <- population(data = pops,
                 subtitle = "2018",
                 xlab = "% of total population")
 p
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/12/gid/1938133263/pat/6/par/E12000008/ati/202/are/E06000045/iid/93563/age/34/sex/4/cid/4/page-options/ovw-do-0_cin-ci-4_car-do-0
 
 
 # Boxplot -----------------------------------------------------------------
@@ -285,6 +295,9 @@ p <- area_profiles(data = df_spine,
                    comparator_area_code = "E54000008")
 
 p
+
+## Compare your outputs to this one:
+## https://fingertips.phe.org.uk/profile/inhale/data#page/1/gid/8000009/pat/44/par/E40000010/ati/154/are/E38000172/cid/4/page-options/ovw-do-0
 
 # Without trend arrow
 ## Try changing the some of the values for header_positions and seeing what effect this has on your plot when you print it to your plot window
