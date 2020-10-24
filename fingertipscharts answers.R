@@ -54,7 +54,7 @@ df_overview <- df %>%
 ## Look at the documentation for the overview() function
 ?overview
 
-# This example demonstrates the principal of how all of the fingertipscharts functions work
+# This example demonstrates the principle of how all of the fingertipscharts functions work
 p <- overview(data = df_overview,
               area = AreaName,
               indicator = IndicatorName,
@@ -83,7 +83,7 @@ plot_data <- df %>%
         
 View(plot_data) # this is the data structure required for the compare_areas function
 
-## complete x, y and area in the code below
+## complete x, y and area in the code below so that Ind1 is on the x axis and Ind2 is on the y axis
 p <- compare_indicators(data = plot_data,
                         x = Ind1,
                         y = Ind2,
