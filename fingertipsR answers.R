@@ -154,7 +154,7 @@ df <- fingertips_data(IndicatorID = 90356,
                       rank = TRUE,
                       url_only = TRUE)
 
-## Copy and paste that url into a web browser to see if the data provided by the API
+## Copy and paste that url into a web browser to see if there is data provided by the API
 
 
 

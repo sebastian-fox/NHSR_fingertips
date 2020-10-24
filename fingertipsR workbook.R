@@ -18,7 +18,7 @@ View(df)
 
 ## Question: do the number of records make sense to you? (for info, there are 151 local authorities and 9 Regions)
 # Note, it is always good to sense check the number of records if possible
-
+table(df$Timeperiod, df$AreaType)
 
 
 # There are 3 ways to help users find IndicatorID
@@ -147,7 +147,7 @@ View(df)
 ## Repeat the query above, but include the argument url_only = TRUE
 df <- fingertips_data()
 
-## Copy and paste that url into a web browser to see if the data provided by the API
+## Copy and paste that url into a web browser to see if there is data provided by the API
 
 
 
