@@ -40,7 +40,7 @@ df <- df %>%
 
 # Overview (or tartan rug) ------------------------------------------------
 
-
+## Execute the following lines of code to filter the indicators for the latest available time period and the areas of interest
 parent <- "South West region"
 fixed_areas <- c("England", parent)
 df_overview <- df %>% 
@@ -69,7 +69,7 @@ p
 ## https://fingertips.phe.org.uk/profile/child-health-profiles/data#page/0/gid/1938133263/pat/6/par/E12000009/ati/202/are/E06000022/cid/4/page-options/ovw-do-0
 
 # Compare indicators ------------------------------------------------------
-
+## Execute the following lines of code to filter and shape the data in the right way
 plot_data <- df %>% 
         group_by(IndicatorID) %>% 
         filter(IndicatorID %in% c(10101, 93563),
@@ -84,6 +84,7 @@ plot_data <- df %>%
 View(plot_data) # this is the data structure required for the compare_areas function
 
 ## complete x, y and area in the code below so that Ind1 is on the x axis and Ind2 is on the y axis
+## use the ?compare_areas documentation for help
 p <- compare_indicators(data = plot_data,
                         x = Ind1,
                         y = Ind2,
@@ -113,7 +114,7 @@ new_ons_api <- "https://opendata.arcgis.com/datasets/b216b4c8a4e74f6fb692a178525
 ons_api <- "https://opendata.arcgis.com/datasets/b216b4c8a4e74f6fb692a1785255d777_0.geojson"
 
 
-## Complete area_code and fill in the map code below
+## Complete area_code and fill in the map code below using the ?fingertipscharts::map documentation
 # Note, I have written "fingertipscharts::" below because this forces the "map" function to come from the fingertipscharts package. There are a few common "map" functions available from other packages too
 p <- fingertipscharts::map(data = map_data,
                            ons_api = ons_api,
@@ -147,7 +148,7 @@ p
 df_trend <- df %>%
         filter(IndicatorID == 10101)
 
-## Complete timeperiod, value, area, fill, lowerci, upperci
+## Complete timeperiod, value, area, fill, lowerci, upperci using the ?trends documentation
 p <- trends(data = df_trend,
             timeperiod = Timeperiod,
             value = Value,
@@ -169,6 +170,7 @@ p
 
 # Compare areas -----------------------------------------------------------
 
+## Execute the following lines of code to get a dataset for one indicator, one region and one year
 parent <- "South West region"
 fixed_areas <- c("England", parent)
 ordered_levels <- c("Better",
@@ -184,6 +186,7 @@ df_ca <- df %>%
         ungroup()
 
 ## Complete the arguments for area, value, fill, lowerci, upperci
+## Use the ?compare_areas documentation
 p <- compare_areas(data = df_ca, 
                    area = AreaName, 
                    value = Value,
@@ -199,6 +202,7 @@ p
 
 
 # Population --------------------------------------------------------------
+## Execute the following lines of code to get 5 year age band population data from Fingertips
 pop_data <- fingertips_data(IndicatorID = 92708,
                             AreaTypeID = 302)
 
@@ -216,6 +220,7 @@ pops <- pop_data %>%
                                        "90+ yrs"))) # this orders the age bands correctly
 
 ## Complete the arguments for value, sex, age, area and area_name (try doing Southampton)
+## Look at the ?population documentation for help
 p <- population(data = pops,
                 value = Value,
                 sex = Sex,
@@ -239,6 +244,7 @@ df_box <- df %>%
                AreaType == "County & UA (4/19-3/20)")
 
 ## Complete the arguments for timeperiod and value
+## Use the ?box_plots documentation for help
 p <- box_plots(df_box,
                timeperiod = Timeperiod,
                value = Value,
@@ -249,7 +255,7 @@ p <- box_plots(df_box,
 p
 
 # Area profiles (spine chart)-----------------------------------------------------------
-
+## Execute the following line to import data from the INHALE profile
 inhale <- fingertips_data(DomainID = 8000009,
                           AreaTypeID = 154,
                           ParentAreaTypeID = 219,
@@ -260,6 +266,7 @@ ind_order <- indicator_order(DomainID = 8000009,
                              AreaTypeID = 154,
                              ParentAreaTypeID = 219)
 
+## Create a vector of the indicator names in the dislay order
 indicator_levels <- inhale %>% 
         left_join(ind_order, by = "IndicatorID") %>% 
         distinct(IndicatorName, Sequence) %>% 
@@ -268,19 +275,21 @@ indicator_levels <- inhale %>%
         rev() %>% 
         str_wrap(30)
 
-# We apply these levels to the IndicatorName field, when turning it into a factor
+## Apply these levels to the IndicatorName field, when turning it into a factor using the following code
 inhale <- inhale %>% 
         mutate(IndicatorName = factor(str_wrap(IndicatorName, 30),
                                       levels = indicator_levels))
 
+## Filter the INHALE data for the latest time period for each indicator
 df_spine <- inhale %>% 
         inner_join(ind_order, by = c("IndicatorID", "Age", "Sex")) %>% # inner_join because there are some indicators that have multiple sex/ages
         group_by(IndicatorID) %>% 
         filter(TimeperiodSortable == max(TimeperiodSortable)) %>% 
         ungroup()
 
-# With trend arrow
+# This exercise produces a spice chart with a trend arrow
 ## Complete value, count, area_code, indicator, timeperiod, trend, polarity, significance, area_type
+## Use ?area_profiles documentation for support
 p <- area_profiles(data = df_spine,
                    value = Value,
                    count = Count,
@@ -299,7 +308,7 @@ p
 ## Compare your outputs to this one:
 ## https://fingertips.phe.org.uk/profile/inhale/data#page/1/gid/8000009/pat/44/par/E40000010/ati/154/are/E38000172/cid/4/page-options/ovw-do-0
 
-# Without trend arrow
+# This exercise produces a spice chart without a trend arrow
 ## Try changing the some of the values for header_positions and seeing what effect this has on your plot when you print it to your plot window
 p <- area_profiles(data = df_spine,
                    value = Value,
