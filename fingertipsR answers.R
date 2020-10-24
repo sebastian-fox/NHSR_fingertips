@@ -188,7 +188,7 @@ View(df)
 # This information is also available from the API usign the indicator_metadata() function
 
 ## Import the indicator metadata for IndicatorID = 91872 and view the results
-indicator_metadata(91872) %>% 
+indicator_metadata(IndicatorID = 91872) %>% 
         View()
 
 
